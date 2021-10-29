@@ -1,0 +1,11 @@
+# Requirements
+https://github.com/structurizr/cli/
+
+# Push to workspace
+``structurizr push -id WORKSPACE_ID -key KEY -secret SECRET -workspace WORKSPACE_FILE"``
+
+# puml to jpg
+https://forum.plantuml.net/11172/generating-images-from-all-puml-files-from-directory-using
+
+# Playground:
+https://structurizr.com/dsl

@@ -1,0 +1,132 @@
+@startuml
+title Sistema de Software de Salud - Containers
+
+top to bottom direction
+
+skinparam {
+  shadowing false
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+  PackageBorderColor<<group>> #cccccc
+  PackageFontColor<<group>> #cccccc
+}
+
+hide stereotype
+
+skinparam rectangle<<SistemadeSoftwaredeSalud.ACCOUNT_SERVICE>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.MEDICAL_HISTORY_SERVICE>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.NOTIFICATION_SERVICE>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.RESERVATION_SERVICE>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.RESOURCES_SERVICE>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.APIGateway>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam person<<Agentedesoporte>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Aplicacionmovilparaelmdico>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Aplicacionmovilparaelpaciente>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Aplicacionwebparaelagentedesoporte>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Aplicacionwebparaelpaciente>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Aplicacinwebparamdicos>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam person<<Mdico>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam person<<Paciente>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Serviciodechat>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud.Serviciodedelivery>> {
+  BackgroundColor #438dd5
+  FontColor #ffffff
+  BorderColor #2e6295
+}
+
+person "==Paciente\n<size:10>[Person]</size>\n\nPaciente que busca atenderse en el sistema de salud publico." <<Paciente>> as Paciente
+person "==Médico\n<size:10>[Person]</size>\n\nMédico que presta servicios en una organización de salud." <<Mdico>> as Mdico
+person "==Agente de soporte\n<size:10>[Person]</size>\n\nAgente encargado de tareas administrativas dentro del sistema." <<Agentedesoporte>> as Agentedesoporte
+
+package "Sistema de Software de Salud\n[Software System]" <<SistemadeSoftwaredeSalud>> {
+  skinparam PackageBorderColor<<SistemadeSoftwaredeSalud>> #444444
+  skinparam PackageFontColor<<SistemadeSoftwaredeSalud>> #444444
+
+  rectangle "==API Gateway\n<size:10>[Container]</size>" <<SistemadeSoftwaredeSalud.APIGateway>> as SistemadeSoftwaredeSalud.APIGateway
+  rectangle "==${ACCOUNT_SERVICE}\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.ACCOUNT_SERVICE>> as SistemadeSoftwaredeSalud.ACCOUNT_SERVICE
+  rectangle "==${RESERVATION_SERVICE}\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.RESERVATION_SERVICE>> as SistemadeSoftwaredeSalud.RESERVATION_SERVICE
+  rectangle "==Servicio de delivery\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.Serviciodedelivery>> as SistemadeSoftwaredeSalud.Serviciodedelivery
+  rectangle "==${NOTIFICATION_SERVICE}\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.NOTIFICATION_SERVICE>> as SistemadeSoftwaredeSalud.NOTIFICATION_SERVICE
+  rectangle "==${RESOURCES_SERVICE}\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.RESOURCES_SERVICE>> as SistemadeSoftwaredeSalud.RESOURCES_SERVICE
+  rectangle "==${MEDICAL_HISTORY_SERVICE}\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.MEDICAL_HISTORY_SERVICE>> as SistemadeSoftwaredeSalud.MEDICAL_HISTORY_SERVICE
+  rectangle "==Servicio de chat\n<size:10>[Container: Docker]</size>" <<SistemadeSoftwaredeSalud.Serviciodechat>> as SistemadeSoftwaredeSalud.Serviciodechat
+  rectangle "==Aplicacion movil para el paciente\n<size:10>[Container: Flutter]</size>\n\nAplicacion movil que sera usada por el paciente para interactuar con el sistema" <<SistemadeSoftwaredeSalud.Aplicacionmovilparaelpaciente>> as SistemadeSoftwaredeSalud.Aplicacionmovilparaelpaciente
+  rectangle "==Aplicacion movil para el médico\n<size:10>[Container: Flutter]</size>\n\nAplicacion movil que sera usada por el médico para interactuar con el sistema" <<SistemadeSoftwaredeSalud.Aplicacionmovilparaelmdico>> as SistemadeSoftwaredeSalud.Aplicacionmovilparaelmdico
+  rectangle "==Aplicacion web para el paciente\n<size:10>[Container: Angular]</size>\n\nAplicacion web que sera usada por el paciente para interactuar con el sistema" <<SistemadeSoftwaredeSalud.Aplicacionwebparaelpaciente>> as SistemadeSoftwaredeSalud.Aplicacionwebparaelpaciente
+  rectangle "==Aplicación web para médicos\n<size:10>[Container: Docker]</size>\n\n{PHYSICIAN_SINGLE_PAGE_WEB_APPLICATION_DESCRIPTION}Angular" <<SistemadeSoftwaredeSalud.Aplicacinwebparamdicos>> as SistemadeSoftwaredeSalud.Aplicacinwebparamdicos
+  rectangle "==Aplicacion web para el agente de soporte\n<size:10>[Container: Navegador Web]</size>\n\nAplicacion web que sera usada por el agente de soporte para gestionar accesos." <<SistemadeSoftwaredeSalud.Aplicacionwebparaelagentedesoporte>> as SistemadeSoftwaredeSalud.Aplicacionwebparaelagentedesoporte
+}
+
+Paciente .[#707070,thickness=2].> SistemadeSoftwaredeSalud.Aplicacionmovilparaelpaciente : "<color:#707070>Agenda citas y recibe notificaciones a través de\n<color:#707070><size:8>[Android]</size>"
+Mdico .[#707070,thickness=2].> SistemadeSoftwaredeSalud.Aplicacionmovilparaelmdico : "<color:#707070>Gestiona horarios y conversa con pacientes a través de\n<color:#707070><size:8>[Android]</size>"
+Paciente .[#707070,thickness=2].> SistemadeSoftwaredeSalud.Aplicacionwebparaelpaciente : "<color:#707070>Agenda citas a través de\n<color:#707070><size:8>[Navegador Web]</size>"
+Mdico .[#707070,thickness=2].> SistemadeSoftwaredeSalud.Aplicacinwebparamdicos : "<color:#707070>Gestiona horarios y conversa con pacientes a través de\n<color:#707070><size:8>[Navegador Web]</size>"
+Agentedesoporte .[#707070,thickness=2].> SistemadeSoftwaredeSalud.Aplicacionwebparaelagentedesoporte : "<color:#707070>Asigna roles y maneja permisos a través de\n<color:#707070><size:8>[Navegador Web]</size>"
+SistemadeSoftwaredeSalud.Aplicacionmovilparaelpaciente .[#707070,thickness=2].> SistemadeSoftwaredeSalud.APIGateway : "<color:#707070>Usa para obtener y manipular información\n<color:#707070><size:8>[Https]</size>"
+SistemadeSoftwaredeSalud.Aplicacionmovilparaelmdico .[#707070,thickness=2].> SistemadeSoftwaredeSalud.APIGateway : "<color:#707070>Usa para obtener y manipular información\n<color:#707070><size:8>[Https]</size>"
+SistemadeSoftwaredeSalud.Aplicacionwebparaelpaciente .[#707070,thickness=2].> SistemadeSoftwaredeSalud.APIGateway : "<color:#707070>Usa para obtener y manipular información\n<color:#707070><size:8>[Https]</size>"
+SistemadeSoftwaredeSalud.Aplicacinwebparamdicos .[#707070,thickness=2].> SistemadeSoftwaredeSalud.APIGateway : "<color:#707070>Usa para obtener y manipular información\n<color:#707070><size:8>[Https]</size>"
+SistemadeSoftwaredeSalud.Aplicacionwebparaelagentedesoporte .[#707070,thickness=2].> SistemadeSoftwaredeSalud.APIGateway : "<color:#707070>Usa para obtener y manipular información\n<color:#707070><size:8>[Https]</size>"
+@enduml

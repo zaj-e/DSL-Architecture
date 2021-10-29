@@ -1,0 +1,53 @@
+@startuml
+title Sistema de Software de Salud - System Context
+
+top to bottom direction
+
+skinparam {
+  shadowing false
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+  PackageBorderColor<<group>> #cccccc
+  PackageFontColor<<group>> #cccccc
+}
+
+hide stereotype
+
+skinparam person<<Agentedesoporte>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam person<<Mdico>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam person<<Paciente>> {
+  BackgroundColor #08427b
+  FontColor #ffffff
+  BorderColor #052e56
+}
+skinparam rectangle<<SistemadeSoftwaredeSalud>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+
+package "Organización de Salud" <<enterprise>> {
+  skinparam PackageBorderColor<<enterprise>> #444444
+  skinparam PackageFontColor<<enterprise>> #444444
+
+  person "==Médico\n<size:10>[Person]</size>\n\nMédico que presta servicios en una organización de salud." <<Mdico>> as Mdico
+  person "==Agente de soporte\n<size:10>[Person]</size>\n\nAgente encargado de tareas administrativas dentro del sistema." <<Agentedesoporte>> as Agentedesoporte
+  rectangle "==Sistema de Software de Salud\n<size:10>[Software System]</size>\n\nPermite a los usuarios atenderse en el la organización de salud" <<SistemadeSoftwaredeSalud>> as SistemadeSoftwaredeSalud
+}
+
+person "==Paciente\n<size:10>[Person]</size>\n\nPaciente que busca atenderse en el sistema de salud publico." <<Paciente>> as Paciente
+
+Paciente .[#707070,thickness=2].> SistemadeSoftwaredeSalud : "<color:#707070>Utiliza para gestionar su acceso y consumo sobre servicios de salud."
+Mdico .[#707070,thickness=2].> SistemadeSoftwaredeSalud : "<color:#707070>Utiliza el sistema para poder gestionar los servicios que brinda."
+Agentedesoporte .[#707070,thickness=2].> SistemadeSoftwaredeSalud : "<color:#707070>Utiliza el sistema para poder gestionar roles y permisos dentro del sistema."
+@enduml
