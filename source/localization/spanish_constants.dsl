@@ -40,6 +40,11 @@
 !constant JSON_TAG "JSON"
 !constant TCP_TAG "TCP"
 !constant XMPP_TAG "XMPP"
+!constant SQL_SERVER_TAG "SQL Server"
+!constant APACHE_KAFKA_TAG "Apache Kafka"
+!constant BLOB_STORAGE_TAG "Blog Storage"
+!constant MONGO_DB_TAG "MongoDB"
+!constant GATEWAY_TAG "Gateway"
 
 # Services
 !constant API_GATEWAY "API Gateway"
@@ -50,16 +55,33 @@
 !constant DELIVERY_SERVICE_DESCRIPTION "Servicio de delivery que encuentra rutas optimas y estratégicas para conectar motorizados o furgonetas, a destinos cercanos donde se necesiten distintos medicamentos."
 !constant CHAT_SERVICE "Servicio de chat"
 !constant CHAT_SERVICE_DESCRIPTION "Servicio que permite comunicación a través de mensajeria directa entre dos usuarios. Utiliza una cola de mensajes para gestionar la transmisión de mensajes."
-!constant ACCOUNT_SERVICE "Servicio de cuentas"
-!constant ACCOUNT_SERVICE_DESCRIPTION "Servicio sigue los principios de Active Directory. Con principios lógicos de autenticación y autorización, con una fuerte segmentación entre ambos y orientado a la seguridad de los datos del paciente."
-!constant RESERVATION_SERVICE "Servicio de reservas"
-!constant RESERVATION_SERVICE_DESCRIPTION "Servicio que se rige bajo el principio de que las personas no creen reservas o citas de por sí, si no, intenciones de cita. A la hora de asignación automática de citas, también se evaluará la prioridad de los pacientes."
-!constant NOTIFICATION_SERVICE "Servicio de notificaciones"
-!constant NOTIFICATION_SERVICE_DESCRIPTION "Servicio de sistema de recordatorios. Cuando personas tienen citas activas, se utilizará una cola de tareas distribuida para enviar notificaciones a los usuarios."
+!constant ACCOUNTS_SERVICE "Servicio de cuentas"
+!constant ACCOUNTS_SERVICE_DESCRIPTION "Servicio sigue los principios de Active Directory. Con principios lógicos de autenticación y autorización, con una fuerte segmentación entre ambos y orientado a la seguridad de los datos del paciente."
+!constant RESERVATIONS_SERVICE "Servicio de reservas"
+!constant RESERVATIONS_SERVICE_DESCRIPTION "Servicio que se rige bajo el principio de que las personas no creen reservas o citas de por sí, si no, intenciones de cita. A la hora de asignación automática de citas, también se evaluará la prioridad de los pacientes."
+!constant NOTIFICATIONS_SERVICE "Servicio de notificaciones"
+!constant NOTIFICATIONS_SERVICE_DESCRIPTION "Servicio de sistema de recordatorios. Cuando personas tienen citas activas, se utilizará una cola de tareas distribuida para enviar notificaciones a los usuarios."
 !constant RESOURCES_SERVICE "Servicio de recursos"
 !constant RESOURCES_SERVICE_DESCRIPTION "Servicio que se encarga de la persistencia y distribución de recursos relacionados a dato de los pacientes."
 !constant MEDICAL_HISTORY_SERVICE "Servicio de historial médico"
 !constant MEDICAL_HISTORY_SERVICE_DESCRIPTION "Servicio que gestiona el historial médico de cada paciente que se atiende en el sistema de salud."
+
+#Databases
+!constant ACCOUNTS_DATABASE "Base de datos de cuentas"
+!constant ACCOUNTS_DATABASE_DESCRIPTION "Base de datos que almacena información relacionada a las identidades del los usuarios."
+
+!constant RESERVATIONS_DATABASE "Base de datos de reservas"
+!constant RESERVATIONS_DATABASE_DESCRIPTION "Base de datos que almacena información relacionada a las reservas e intenciones de reserva."
+
+!constant DELIVERY_DATABASE "Base de datos de delivery"
+!constant DELIVERY_DATABASE_DESCRIPTION "Base de datos que almacena información servicios de delivery."
+
+!constant RESOURCES_DATABASE "Base de datos de recursos"
+!constant RESOURCES_DATABASE_DESCRIPTION "Base de datos que almacena distintos tipos de archivo."
+
+
+# Database Relationships
+!constant GENERIC_RELATIONSHIP_TO_DATABASE "Extra, Modifica e inserta datos de"
 
 # Healthcare System Relationships
 !constant PATIENT_ACTION_HEALTH_CARE_SYSTEM "Utiliza para gestionar su acceso y consumo sobre servicios de salud."

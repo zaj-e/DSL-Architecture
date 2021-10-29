@@ -21,16 +21,27 @@ workspace ${WORKSPACE_NAME} "Arquitectura de software basada en microservicios c
                 supportStaffSinglePageWebApplication = container ${SUPPORT_STAFF_SINGLE_PAGE_WEB_APPLICATION} ${SUPPORT_STAFF_SINGLE_PAGE_WEB_APPLICATION_DESCRIPTION} ${WEB_BROWSER_TAG} ${ANGULAR}
 
                 # microservice components
-                apiGateway = container ${API_GATEWAY} ${API_GATEWAY_DESCRIPTION} ${GOLANG_TAG} ${DOCKER_TAG}
+                apiGateway = container ${API_GATEWAY} ${API_GATEWAY_DESCRIPTION} ${GOLANG_TAG} ${GATEWAY_TAG}
                 serviceRegistry = container ${SERVICE_REGISTRY} ${SERVICE_REGISTRY_DESCRIPTION} ${GOLANG_TAG} ${DOCKER_TAG}
 
                 # service containers
-                accountService = container ${ACCOUNT_SERVICE} ${ACCOUNT_SERVICE_DESCRIPTION} ${DOCKER_TAG}
-                reservationsService = container ${RESERVATION_SERVICE} ${RESERVATION_SERVICE_DESCRIPTION} ${NET_CORE_TAG} ${DOCKER_TAG}
+                notificationsService = container ${NOTIFICATIONS_SERVICE} ${NOTIFICATIONS_SERVICE_DESCRIPTION} ${APACHE_KAFKA_TAG} ${DOCKER_TAG} 
+
+                accountService = container ${ACCOUNTS_SERVICE} ${ACCOUNTS_SERVICE_DESCRIPTION} ${DOCKER_TAG}
+                accountDatabase = container ${ACCOUNTS_DATABASE} ${ACCOUNTS_DATABASE_DESCRIPTION} ${SQL_SERVER_TAG} ${DOCKER_TAG} 
+
+                reservationsService = container ${RESERVATIONS_SERVICE} ${RESERVATIONS_SERVICE_DESCRIPTION} ${NET_CORE_TAG} ${DOCKER_TAG}
+                reservationDatabase = container ${RESERVATIONS_DATABASE} ${RESERVATIONS_DATABASE_DESCRIPTION} ${SQL_SERVER_TAG} ${DOCKER_TAG} 
+
                 deliveryService = container ${DELIVERY_SERVICE} ${DELIVERY_SERVICE_DESCRIPTION} ${DOCKER_TAG}
-                notificationsService = container ${NOTIFICATION_SERVICE} ${NOTIFICATION_SERVICE_DESCRIPTION} ${DOCKER_TAG}
+                deliveryDatabase = container ${DELIVERY_DATABASE} ${DELIVERY_DATABASE_DESCRIPTION} ${SQL_SERVER_TAG} ${DOCKER_TAG} 
+                
                 resourcesService = container ${RESOURCES_SERVICE} ${RESOURCES_SERVICE_DESCRIPTION} ${NET_CORE_TAG} ${DOCKER_TAG}
+                resourcesDatabase = container ${RESOURCES_DATABASE} ${RESOURCES_DATABASE_DESCRIPTION} ${BLOB_STORAGE_TAG}
+
                 medicalHistoryService = container ${MEDICAL_HISTORY_SERVICE} ${MEDICAL_HISTORY_SERVICE_DESCRIPTION} ${NET_CORE_TAG} ${DOCKER_TAG}
+                medicalHistoryDatabase = container ${MEDICAL_HISTORY_DATABASE} ${MEDICAL_HISTORY_DATABASE_DESCRIPTION} ${MONGO_DB_TAG}
+                
                 chatService = container ${CHAT_SERVICE} ${CHAT_SERVICE_DESCRIPTION} ${NET_CORE_TAG} ${DOCKER_TAG}
             }
         }
@@ -59,6 +70,13 @@ workspace ${WORKSPACE_NAME} "Arquitectura de software basada en microservicios c
         physician -> healthcareSystem ${PHYSICIAN_ACTION_HEALTH_CARE_SYSTEM}
         supportStaff -> healthcareSystem ${SUPPORT_AGENT_ACTION_HEALTH_CARE_SYSTEM}
 
+        # relationships to database
+        accountService -> accountDatabase ${GENERIC_RELATIONSHIP_TO_DATABASE} ${TCP_TAG}
+        reservationsService -> reservationDatabase ${GENERIC_RELATIONSHIP_TO_DATABASE} ${TCP_TAG}
+        deliveryService -> deliveryDatabase ${GENERIC_RELATIONSHIP_TO_DATABASE} ${TCP_TAG}
+        resourcesService -> resourcesDatabase ${GENERIC_RELATIONSHIP_TO_DATABASE} ${TCP_TAG}
+        medicalHistoryService -> medicalHistoryDatabase ${GENERIC_RELATIONSHIP_TO_DATABASE} ${TCP_TAG}
+
         # relationships to/from containers
         patient -> patientMobileApplication ${PATIENT_ACTION_MOBILE_APP} ${ANDROID_TAG} ${IOS_TAG}
         physician -> physicianMobileApplication ${PHYSICIAN_ACTION_MOBILE_APP} ${ANDROID_TAG} ${IOS_TAG}
@@ -78,7 +96,6 @@ workspace ${WORKSPACE_NAME} "Arquitectura de software basada en microservicios c
         apiGateway -> deliveryService "" ${HTTPS_TAG}
         apiGateway -> resourcesService "" ${HTTPS_TAG}
         apiGateway -> medicalHistoryService "" ${HTTPS_TAG}
-        # apiGateway -> chatService ${HTTPS_TAG}
         patientMobileApplication -> chatService ${GENERIC_RELATIONSHIP_TO_CHAT_SERVICE} ${XMPP_TAG} ${WEBSOCKETS_TAG}
         physicianMobileApplication -> chatService ${GENERIC_RELATIONSHIP_TO_CHAT_SERVICE} ${XMPP_TAG} ${WEBSOCKETS_TAG}
 
@@ -116,6 +133,11 @@ workspace ${WORKSPACE_NAME} "Arquitectura de software basada en microservicios c
                 resourcesService
                 medicalHistoryService
                 serviceRegistry
+                accountDatabase
+                reservationDatabase
+                deliveryDatabase
+                resourcesDatabase
+                medicalHistoryDatabase
             }
             autoLayout
         }
@@ -135,6 +157,15 @@ workspace ${WORKSPACE_NAME} "Arquitectura de software basada en microservicios c
             }
             element ${MOBILE_APP_TAG} {
                 shape MobileDeviceLandscape
+            }
+            element ${SQL_SERVER_TAG} {
+                shape Cylinder
+            }
+            element ${APACHE_KAFKA_TAG} {
+                shape Pipe
+            }
+            element ${GATEWAY_TAG} {
+                shape Hexagon
             }
         }
     }
